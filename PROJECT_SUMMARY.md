@@ -1,0 +1,164 @@
+# Snapshot Banner - Social Media Banner Generator
+
+A full-stack web application for generating social media banners from any website URL using live screenshots.
+
+## Project Structure
+
+```
+Snapshotbanner/
+├── backend/              # Node.js Express API
+│   └── server.js        # Screenshot proxy endpoint
+├── frontend/            # React application
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Header.jsx
+│   │   │   ├── Hero.jsx
+│   │   │   ├── CanvasEditor.jsx
+│   │   │   └── ControlsPanel.jsx
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   └── package.json
+└── _assets/
+    └── landing.html     # Design reference
+```
+
+## Tech Stack
+
+### Backend
+- **Node.js** with Express
+- **Screenshotlayer API** for capturing screenshots
+- **CORS** enabled for frontend communication
+
+### Frontend
+- **React 19** with Hooks
+- **Vite** for fast development and building
+- **Tailwind CSS** for styling
+- **Canvas API** for image manipulation
+- **pnpm** for package management
+
+## Features Implemented
+
+### 1. Screenshot Capture
+- Enter any website URL
+- Fetch screenshot via backend proxy (`/api/screenshot/proxy`)
+- Automatic image loading with error handling
+
+### 2. Canvas Editor
+- **Drag to reposition** - Click and drag the screenshot
+- **Scroll to zoom** - Mouse wheel zoom with cursor tracking
+- **High-DPI rendering** - Crisp display on Retina screens
+- **Reset view** button to return to default state
+
+### 3. Canvas Settings
+- **Preset sizes** for popular social media formats:
+  - 1280×720 (Thumbnail)
+  - 1500×500 (Header)
+  - 1080×1080 (Square/Instagram)
+  - 1080×1350 (Portrait/Instagram)
+  - 1200×627 (Link preview)
+  - 820×360 (Cover)
+- **Custom dimensions** with manual width/height input
+- **Background color** picker with hex input
+- **Retina 2x toggle** for high-resolution exports
+
+### 4. Image Controls
+- **Scale slider** (25% - 250%)
+- **Center button** - Reset image position
+- **Fit button** - Auto-scale to fill canvas
+
+### 5. Output Options
+- **Format selection**: PNG or WebP
+- **Quality slider** for WebP (50% - 100%)
+- **Copy to clipboard** functionality
+- **Download** with proper naming convention
+
+### 6. Design
+- Dark theme with gradient backdrop
+- Responsive layout (mobile-friendly)
+- Smooth transitions and hover effects
+- Professional UI matching the landing.html design
+
+## Running the Application
+
+### Backend
+```bash
+cd backend
+npm start
+# Runs on http://localhost:3001
+```
+
+### Frontend
+```bash
+cd frontend
+nvm use 22
+pnpm dev
+# Runs on http://localhost:5173 (or 5174)
+```
+
+## API Endpoint
+
+```
+GET http://localhost:3001/api/screenshot/proxy?url={encoded_url}
+```
+
+**Parameters:**
+- `url` (required) - The website URL to capture
+
+**Response:**
+- Returns the screenshot image with CORS headers
+
+## Usage Flow
+
+1. User enters a website URL
+2. Frontend sends request to backend proxy
+3. Backend fetches screenshot from Screenshotlayer API
+4. Image loads into the canvas editor
+5. User adjusts position, size, background, and format
+6. User exports as PNG/WebP via copy or download
+
+## Key Components
+
+### App.jsx
+- Main state management
+- Screenshot fetching logic
+- Export functionality
+- Layout composition
+
+### CanvasEditor.jsx
+- Canvas rendering with device pixel ratio
+- Drag and zoom interactions
+- Export buttons (copy/download)
+
+### ControlsPanel.jsx
+- Canvas size presets and custom dimensions
+- Background color picker
+- Retina toggle
+- Scale slider
+- Format and quality controls
+
+### Hero.jsx
+- URL input field
+- Capture button
+- Feature badges
+
+### Header.jsx
+- Branding and navigation
+
+## Notes
+
+- Backend must be running for screenshot capture to work
+- CORS is configured to allow localhost development
+- Images are loaded with `crossOrigin: 'anonymous'` for canvas export
+- Retina export doubles the resolution for crisp results
+
+## Future Enhancements
+
+- Loading states and progress indicators
+- Toast notifications instead of alerts
+- Image filters and effects
+- Text overlay capabilities
+- Multiple image layers
+- Undo/redo functionality
+- Save/load projects
+- Share generated banners
