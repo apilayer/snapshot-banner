@@ -140,18 +140,31 @@ function App() {
         )}
       </div>
 
-      <Header theme={theme} onToggleTheme={toggleTheme} />
-      
-      <main className="relative z-10">
-        <Hero urlInput={urlInput} setUrlInput={setUrlInput} onCapture={handleCapture} theme={theme} />
+      <div className="relative z-10">
+        <div className="w-full bg-[#FFF9C4] text-slate-900 text-center text-xs sm:text-sm font-medium py-3 px-4 shadow-sm">
+          <a 
+            href="https://screenshotlayer.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="underline decoration-slate-500/50 hover:decoration-slate-900 transition-colors"
+          >
+            This app is built using the Screenshotlayer API.
+          </a>
+        </div>
+
+        <Header theme={theme} onToggleTheme={toggleTheme} />
         
-        <section className="mx-auto max-w-7xl px-6 mt-10 sm:mt-12 pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <CanvasEditor state={state} setState={setState} onExport={exportCanvasBlob} theme={theme} />
-            <ControlsPanel state={state} setState={setState} theme={theme} />
-          </div>
-        </section>
-      </main>
+        <main className="relative z-10">
+          <Hero urlInput={urlInput} setUrlInput={setUrlInput} onCapture={handleCapture} theme={theme} />
+          
+          <section className="mx-auto max-w-7xl px-6 mt-10 sm:mt-12 pb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <CanvasEditor state={state} setState={setState} onExport={exportCanvasBlob} theme={theme} />
+              <ControlsPanel state={state} setState={setState} theme={theme} />
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
   );
 }
